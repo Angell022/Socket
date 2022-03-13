@@ -1,0 +1,191 @@
+:root{
+    --color: rgb(137, 86, 189);
+    --color-dark: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(157,39,172,1) 31%, rgba(0,212,255,1)90%);
+    --transition: 280ms all 120ms ease-out;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.dropdown__title {
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+}
+
+nav {
+  background-color: var(--color);
+  padding: 0 1rem;
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+}
+  nav ul {
+    grid-auto-flow: column;
+   }
+    nav ul li {
+      margin: 0 0.5rem;
+    }
+    nav ul a,
+    nav ul li .dropdown__title {
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        color: #fff;
+        font-size: 1.125rem;
+      }
+      nav ul a,
+    nav ul li .dropdown__title:focus {
+        outline: none;
+    }
+
+    nav ul a,
+    nav ul li .dropdown__title {
+        padding: 1rem 0.5rem;
+        border-top: 3px solid transparent;
+        transition: var(--transition);
+      }
+      
+    nav ul li .dropdown__title:hover {
+        border-top-color: pink;
+          color: pink;
+    }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+}
+ul li{
+    padding: 0;
+}
+
+.dropdown {
+  position: relative;
+}
+  .dropdown__title {
+    display: inline-flex;
+    align-items: center;
+  }
+  .dropdown__title {
+    content: "";
+    border: 0.35rem solid transparent;
+    border-top-color: rgba(#fff, 0.45);
+    margin-left: 0.25em;
+    transform: translateY(0.15em);
+  }
+
+  .dropdown__menu {
+    position: absolute;
+    min-width: 15ch;
+    left: 50%;
+    top: calc(100% - 0.25rem);
+    transition: var(--transition);
+    transform: rotateX(-90deg) translateX(-50%);
+    transform-origin: top center;
+    visibility: hidden;
+    opacity: 0.3;
+    padding: 0.5em 0;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0.15em 0.25em rgba(black, 0.25);
+  }
+    .dropdown__menu a {
+      color:  var(--color-dark);
+      display: block;
+      padding: 0.5em;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .dropdown__menu a:hover {
+        background-color: rgba(var(--color), 0.15);
+      }
+
+      .dropdown__menu a:focus {
+        outline: none;
+        background-color: rgba(var(--color), 0.25);
+      }
+
+      .dropdown__menu a:after {
+    content: "";
+    border: 0.5rem solid transparent;
+    border-bottom-color: #fff;
+    position: absolute;
+    top: calc(100% - 1.25rem);
+    left: 50%;
+    transform: translateX(-50%);
+    transition:  var(--transition);
+    opacity: 0;
+    will-change: opacity;
+  }
+  .dropdown__menu a:hover,
+  .dropdown__menu a:focus-within{
+    border-top-color: pink;
+  }
+  .dropdown__menu {
+    opacity: 1;
+    transform: rotateX(0) translateX(-50%);
+    visibility: visible;
+  }
+   .dropdown__menu a {
+      opacity: 1;
+    }
+    .dropdown__menu a::after{
+        opacity: 1;
+    }
+
+    .dropdown__title {
+      border-top-color: pink;
+    }
+
+body {
+    background-image: url("../images/circle-scatter-haikei.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  font-family: "Baloo 2", sans-serif;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+header,
+footer {
+  display: grid;
+  place-items: center;
+}
+
+header {
+  background-image: url("../images/cake3.jpg");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  box-shadow: inset 100vw 100vh rgba(var(--color), 0.6);
+  min-height: 40vh;
+  color: #fff;
+}
+
+main {
+  padding: 1rem;
+  max-width: 80ch;
+  margin: 0 auto;
+}
+  main:focus {
+    outline: none;
+  }
+
+footer {
+  background-color: mintcream;
+}
+
+h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
