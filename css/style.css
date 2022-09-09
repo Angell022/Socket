@@ -158,11 +158,11 @@ footer {
 }
 
 header {
-  background-image: url("../images/cake3.jpg");
+  background: url("../images/aerobic-girls.jpg");
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center bottom;
-  background-repeat: no-repeat;
-  box-shadow: inset 100vw 100vh rgba(var(--color), 0.6);
+  box-shadow: inset 150vw 150vh rgba(var(--color), 0.6);
   min-height: 40vh;
   color: #fff;
 }

@@ -1,49 +1,47 @@
-$(document).ready(function(){
+$(".main-menu li:first").addClass("active");
 
-  $('#menu').click(function(){
-      $(this).toggleClass('fa-times');
-      $('.navbar').toggleClass('nav-toggle');
-  });
+      var showSection = function showSection(section, isAnimate) {
+        var direction = section.replace(/#/, ""),
+          reqSection = $(".section").filter(
+            '[data-section="' + direction + '"]'
+          ),
+          reqSectionPos = reqSection.offset().top - 0;
 
-  $(window).on('load scroll',function(){
+        if (isAnimate) {
+          $("body, html").animate(
+            {
+              scrollTop: reqSectionPos
+            },
+            800
+          );
+        } else {
+          $("body, html").scrollTop(reqSectionPos);
+        }
+      };
 
-      $('#menu').removeClass('fa-times');
-      $('.navbar').removeClass('nav-toggle');
-
-      if($(window).scrollTop() > 60){
-          $('header .header-2').addClass('header-active');
-      }else{
-          $('header .header-2').removeClass('header-active');
-      }
-
-      $('section').each(function(){
-
-          let height = $(this).height();
-          let offset = $(this).offset().top - 200;
-          let top = $(window).scrollTop();
-          let id = $(this).attr('id');
-
-          if(top >= offset && top < offset + height){
-              $('.navbar ul li a').removeClass('active');
-              $('.navbar').find(`[href="#${id}"]`).addClass('active');
+      var checkSection = function checkSection() {
+        $(".section").each(function() {
+          var $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+          if (topEdge < wScroll && bottomEdge > wScroll) {
+            var currentId = $this.data("section"),
+              reqLink = $("a").filter("[href*=\\#" + currentId + "]");
+            reqLink
+              .closest("li")
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
           }
+        });
+      };
 
+      $(".main-menu").on("click", "a", function(e) {
+        e.preventDefault();
+        showSection($(this).attr("href"), true);
       });
 
-  });
-
-  $('.controls .buttons').click(function(){
-
-      $(this).addClass('button-active').siblings().removeClass('button-active');
-
-      let filter = $(this).attr('data-filter');
-      if(filter == 'all'){
-          $('.dish .image').show(400);
-      }else{
-          $('.dish .image').not('.'+filter).hide(200);
-          $('.dish .image').filter('.'+filter).show(400);
-      }
-
-  });
-
-});
+      $(window).scroll(function() {
+        checkSection();
+      });
